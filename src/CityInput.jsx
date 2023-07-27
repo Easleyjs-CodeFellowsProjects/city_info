@@ -10,19 +10,42 @@ class CityInput extends React.Component {
             cityValue: '',
             loc_name: '',
             lat: '',
-            lon: ''
+            lon: '',
+            displayError: false,
+            apiError: ''
         }
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        let loc_url = `https://us1.locationiq.com/v1/search.php?key=${import.meta.env.VITE_LOCATION_KEY}&q=${this.state.cityValue}&format=json`
-        let cityData = await axios.get(loc_url)
+        //if (this.state.cityValue) {
+            this.setState({ displayError: false,
+                            apiError: ''
+            })
+            let loc_url = `https://us1.locationiq.com/v1/search.php?key=${import.meta.env.VITE_LOCATION_KEY}&q=${this.state.cityValue}&format=json`
+            let cityData = await axios.get(loc_url).catch((err) => {
+                this.setState({ apiError: err.message })
+            })
 
-        this.props.setCityInfo({ cityName: cityData.data[0].display_name,
-                        lat: cityData.data[0].lat,
-                        lon: cityData.data[0].lon        
-        })
+            this.props.setCityInfo({ cityName: cityData.data[0].display_name,
+                            lat: cityData.data[0].lat,
+                            lon: cityData.data[0].lon        
+            })
+        //}else{
+        //    this.setState({ displayError: true })
+        //}
+    }
+
+    errorMessage = (displayError) => {
+        if (displayError) {
+            return <p className='text-warning'>Please enter a City name.</p>
+        }
+    }
+
+    apiErrorMessage = (displayApiError) => {
+        if (displayApiError) {
+            return <p className='text-warning'>API Error: { this.state.apiError }</p>
+        }
     }
 
     render() {
@@ -36,10 +59,16 @@ class CityInput extends React.Component {
                                 onChange={(e) => { this.setState( { cityValue: e.target.value } )}}
                     >
                     </Form.Control>
+                    {
+                        this.errorMessage(this.state.displayError)
+                    }
                 </Form.Group>
                 <Button variant="flat" type="submit">
                 Explore!
               </Button>
+              {
+                    this.apiErrorMessage(this.state.apiError)
+              }
             </Form>
             <p>{this.state.loc_name}</p>
             <p>{this.state.lat}</p>

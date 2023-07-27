@@ -20,9 +20,39 @@ Built with React. Using Axios to get city information from LocationIQ.
 
 ## Time Tracking
 
-Name of feature: ________________________________
+Name of feature: Locations
 
-Estimate of time needed to complete: _____
+Description: As a user of City Explorer, I want to enter the name of a location so that I can see the exact latitude and longitude of that location.
+
+Estimate of time needed to complete: 4 hrs
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+-------
+
+Name of feature: Maps
+
+Description: As a user, I want to see a map of the city so that I can see the layout of the area I want to explore.
+
+Estimate of time needed to complete: 2 hrs
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+-------
+
+Name of feature: Errors
+
+Description: As a user, I want clear messages if something goes wrong so I know if I need to make any changes or try again in a different manner.
+
+Estimate of time needed to complete: 2 hrs
 
 Start time: _____
 

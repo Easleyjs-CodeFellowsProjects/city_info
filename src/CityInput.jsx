@@ -21,7 +21,7 @@ class CityInput extends React.Component {
 
         this.props.setCityInfo({ cityName: cityData.data[0].display_name,
                         lat: cityData.data[0].lat,
-                        lon: cityData.data[0].lon
+                        lon: cityData.data[0].lon        
         })
     }
 
@@ -37,7 +37,7 @@ class CityInput extends React.Component {
                     >
                     </Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="flat" type="submit">
                 Explore!
               </Button>
             </Form>

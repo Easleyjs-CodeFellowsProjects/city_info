@@ -1,3 +1,13 @@
 body {
-    padding: 3rem;
+    padding-left: 33%;
+}
+
+.btn-flat {
+    background-color: forestgreen;
+    color: white;
+    border: 1px solid darkgrey;
+  }
+
+.card-flat {
+    border: 1px solid darkgrey;
 }

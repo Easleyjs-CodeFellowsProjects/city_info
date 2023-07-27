@@ -20,7 +20,7 @@ class CityContainer extends React.Component {
         return (
             <>
                 <CityInput setCityInfo={this.updateCityInfo} />
-                <CityCard cityName={this.state.cityName} lat={this.state.lat} lon={this.state.lon} />
+                <CityCard cityName={this.state.cityName} lat={this.state.lat} lon={this.state.lon} map={this.state.map} />
             </>
         )
     }

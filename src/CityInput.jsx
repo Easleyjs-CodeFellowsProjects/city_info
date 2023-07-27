@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form';
-import { Button } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 class CityInput extends React.Component {
@@ -44,7 +44,9 @@ class CityInput extends React.Component {
 
     apiErrorMessage = (displayApiError) => {
         if (displayApiError) {
-            return <p className='text-warning'>API Error: { this.state.apiError }</p>
+            return <Alert key='1' variant='danger'>
+            API Error: { this.state.apiError }
+          </Alert>
         }
     }
 

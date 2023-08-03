@@ -18,22 +18,31 @@ class CityInput extends React.Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        //if (this.state.cityValue) {
-            this.setState({ displayError: false,
-                            apiError: ''
-            })
-            let loc_url = `https://us1.locationiq.com/v1/search.php?key=${import.meta.env.VITE_LOCATION_KEY}&q=${this.state.cityValue}&format=json`
-            let cityData = await axios.get(loc_url).catch((err) => {
-                this.setState({ apiError: err.message })
-            })
 
-            this.props.setCityInfo({ cityName: cityData.data[0].display_name,
-                            lat: cityData.data[0].lat,
-                            lon: cityData.data[0].lon        
-            })
-        //}else{
-        //    this.setState({ displayError: true })
-        //}
+        this.setState({ displayError: false,
+                        apiError: ''
+        })
+        const loc_url = `https://us1.locationiq.com/v1/search.php?
+                       key=${import.meta.env.VITE_LOCATION_KEY}
+                       &q=${this.state.cityValue}
+                       &format=json`
+        let cityData = await axios.get(loc_url).catch((err) => {
+            this.setState({ apiError: err.message })
+        })
+        const { display_name, lat, lon } = cityData.data[0]
+        this.props.setCityInfo({ cityName: display_name,
+                                 lat: lat,
+                                 lon: lon        
+        })
+        // make call to local api /weather route with name, lat, lon
+        const { cityValue } = this.state
+        const weather_url = `${import.meta.env.VITE_WEATHER_ROUTE}?searchQuery=${cityValue}&lat=${lat}&lon=${lon}`
+        const weatherData = await axios.get(weather_url).catch((err) => {
+            this.setState({ apiError: err.message })
+        })
+        this.props.updateWeatherInfo(weatherData.data)
+        //console.log(weatherData)
+
     }
 
     errorMessage = (displayError) => {
@@ -53,7 +62,7 @@ class CityInput extends React.Component {
     render() {
         return (
             <>
-            <Form onSubmit={(e) => { this.handleSubmit(e) }}>
+            <Form onSubmit={ (e) => { this.handleSubmit(e) }}>
                 <Form.Group className="mb-3" controlId="cityInput">
                     <Form.Control type="text"
                                 aria-label="Input the name of the city to search"

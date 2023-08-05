@@ -2,7 +2,6 @@ import React from 'react'
 import CityInput from './CityInput'
 import CityCard from './CityCard'
 
-
 class CityContainer extends React.Component {
     constructor(props) {
         super(props)

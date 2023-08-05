@@ -22,10 +22,9 @@ class CityInput extends React.Component {
         this.setState({ displayError: false,
                         apiError: ''
         })
-        const loc_url = `https://us1.locationiq.com/v1/search.php?
-                       key=${import.meta.env.VITE_LOCATION_KEY}
-                       &q=${this.state.cityValue}
-                       &format=json`
+        const loc_url = `https://us1.locationiq.com/v1/search.php?` +
+                        `key=${import.meta.env.VITE_LOCATION_KEY}`  +
+                        `&q=${this.state.cityValue}&format=json`
         let cityData = await axios.get(loc_url).catch((err) => {
             this.setState({ apiError: err.message })
         })
@@ -71,6 +70,7 @@ class CityInput extends React.Component {
     render() {
         return (
             <>
+            <p>testing {import.meta.env.VITE_LOCATION_KEY} </p>
             <Form onSubmit={ (e) => { this.handleSubmit(e) }}>
                 <Form.Group className="mb-3" controlId="cityInput">
                     <Form.Control type="text"

@@ -21,7 +21,7 @@ class CityContainer extends React.Component {
 
     updateWeatherInfo = (weatherDaysArr) => {
         this.setState({'weatherData': weatherDaysArr})
-        console.log(weatherDaysArr)
+        //console.log(weatherDaysArr)
     }
 
     render() {

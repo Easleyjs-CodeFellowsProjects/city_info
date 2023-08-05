@@ -34,15 +34,24 @@ class CityInput extends React.Component {
                                  lat: lat,
                                  lon: lon        
         })
-        // make call to local api /weather route with name, lat, lon
         const { cityValue } = this.state
-        const weather_url = `${import.meta.env.VITE_WEATHER_ROUTE}?searchQuery=${cityValue}&lat=${lat}&lon=${lon}`
+
+        // make call to local api /weather route with name, lat, lon
+        const weather_url = `${import.meta.env.VITE_WEATHER_ROUTE}` + 
+                            `?searchQuery=${cityValue}` + 
+                            `&lat=${lat}&lon=${lon}`
         const weatherData = await axios.get(weather_url).catch((err) => {
             this.setState({ apiError: err.message })
         })
         this.props.updateWeatherInfo(weatherData.data)
-        //console.log(weatherData)
 
+        // make call to local api /movies route with searchQuery/city name
+        const movies_url = `${import.meta.env.VITE_MOVIES_ROUTE}` + 
+                            `?searchQuery=${cityValue}`
+        const moviesData = await axios.get(movies_url).catch((err) => {
+            this.setState({ apiError: err.message })
+        })
+        this.props.updateMoviesInfo(moviesData.data)
     }
 
     errorMessage = (displayError) => {

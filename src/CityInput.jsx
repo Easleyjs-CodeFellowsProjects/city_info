@@ -16,9 +16,16 @@ class CityInput extends React.Component {
         }
     }
 
+    updateAPIData = async (options) => {
+        const { query_url, stateUpdate } = options
+        const queryData = await axios.get(query_url).catch((err) => {
+            this.setState({ apiError: err.message })
+        })
+        stateUpdate(queryData.data)
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
-
         this.setState({ displayError: false,
                         apiError: ''
         })
@@ -36,21 +43,16 @@ class CityInput extends React.Component {
         const { cityValue } = this.state
 
         // make call to local api /weather route with name, lat, lon
-        const weather_url = `${import.meta.env.VITE_WEATHER_ROUTE}` + 
-                            `?searchQuery=${cityValue}` + 
-                            `&lat=${lat}&lon=${lon}`
-        const weatherData = await axios.get(weather_url).catch((err) => {
-            this.setState({ apiError: err.message })
+        this.updateAPIData({ query_url: `${import.meta.env.VITE_WEATHER_ROUTE}` + 
+                                        `?searchQuery=${cityValue}` + 
+                                        `&lat=${lat}&lon=${lon}`,
+                             stateUpdate: this.props.updateWeatherInfo
         })
-        this.props.updateWeatherInfo(weatherData.data)
 
         // make call to local api /movies route with searchQuery/city name
-        const movies_url = `${import.meta.env.VITE_MOVIES_ROUTE}` + 
-                            `?searchQuery=${cityValue}`
-        const moviesData = await axios.get(movies_url).catch((err) => {
-            this.setState({ apiError: err.message })
+        this.updateAPIData({ query_url: `${import.meta.env.VITE_MOVIES_ROUTE}?searchQuery=${cityValue}`,
+                             stateUpdate: this.props.updateMoviesInfo
         })
-        this.props.updateMoviesInfo(moviesData.data)
     }
 
     errorMessage = (displayError) => {

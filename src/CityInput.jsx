@@ -70,29 +70,28 @@ class CityInput extends React.Component {
     render() {
         return (
             <>
-            <p>testing {import.meta.env.VITE_LOCATION_KEY} </p>
-            <Form onSubmit={ (e) => { this.handleSubmit(e) }}>
-                <Form.Group className="mb-3" controlId="cityInput">
-                    <Form.Control type="text"
-                                aria-label="Input the name of the city to search"
-                                style={{width: 300 + 'px'}}
-                                onChange={(e) => { this.setState( { cityValue: e.target.value } )}}
-                    >
-                    </Form.Control>
-                    {
-                        this.errorMessage(this.state.displayError)
-                    }
-                </Form.Group>
-                <Button variant="flat" type="submit">
-                Explore!
-              </Button>
-              {
-                    this.apiErrorMessage(this.state.apiError)
-              }
-            </Form>
-            <p>{this.state.loc_name}</p>
-            <p>{this.state.lat}</p>
-            <p>{this.state.lon}</p>
+                <Form onSubmit={ (e) => { this.handleSubmit(e) }}>
+                    <Form.Group className="mb-3" controlId="cityInput">
+                        <Form.Control type="text"
+                                    aria-label="Input the name of the city to search"
+                                    style={{width: 300 + 'px'}}
+                                    onChange={(e) => { this.setState( { cityValue: e.target.value } )}}
+                        >
+                        </Form.Control>
+                        {
+                            this.errorMessage(this.state.displayError)
+                        }
+                    </Form.Group>
+                    <Button variant="flat" type="submit">
+                    Explore!
+                </Button>
+                {
+                        this.apiErrorMessage(this.state.apiError)
+                }
+                </Form>
+                <p>{this.state.loc_name}</p>
+                <p>{this.state.lat}</p>
+                <p>{this.state.lon}</p>
             </>
         );
     }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Image } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import CityWeather from './CityWeather';
+import CityMovies from './CityMovies';
 
 class CityCard extends React.Component {
     render () {
@@ -15,7 +16,10 @@ class CityCard extends React.Component {
                   Lon: {this.props.lon}
                 </Card.Text>
               </Card.Body>
+              <h3>Local Weather Forecast (16-day)</h3>
               <CityWeather weatherData={this.props.weatherData} />
+              <h3>Popular Movies featuring this City</h3>
+              <CityMovies moviesData={this.props.moviesData} />
           </Card>
         )
     }

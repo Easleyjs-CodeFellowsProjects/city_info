@@ -11,7 +11,7 @@ class CityContainer extends React.Component {
             lat: '',
             lon: '',
             weatherData: [],
-            
+            moviesData: []
         }
     }
 
@@ -21,18 +21,24 @@ class CityContainer extends React.Component {
 
     updateWeatherInfo = (weatherDaysArr) => {
         this.setState({'weatherData': weatherDaysArr})
-        //console.log(weatherDaysArr)
+    }
+
+    updateMoviesInfo = (moviesArr) => {
+        this.setState({'moviesData': moviesArr})
     }
 
     render() {
         return (
             <>
-                <CityInput setCityInfo={this.updateCityInfo} updateWeatherInfo={this.updateWeatherInfo} />
+                <CityInput setCityInfo={this.updateCityInfo} 
+                           updateWeatherInfo={this.updateWeatherInfo} 
+                           updateMoviesInfo={this.updateMoviesInfo} />
                 <CityCard cityName={this.state.cityName} 
                           lat={this.state.lat} 
                           lon={this.state.lon} 
                           map={this.state.map}
-                          weatherData={this.state.weatherData} />
+                          weatherData={this.state.weatherData} 
+                          moviesData={this.state.moviesData} />
 
             </>
         )

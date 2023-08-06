@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import WeatherDay from './WeatherDay'
 
 class CityWeather extends React.Component {
 
@@ -15,10 +16,7 @@ class CityWeather extends React.Component {
                 <tbody>
                     { this.props.weatherData.map((day, idx) => {
                         return (
-                            <tr key={idx} >
-                                <td>{day.date}</td>
-                                <td>{day.desc}</td>
-                            </tr>
+                            <WeatherDay key={idx} date={day.date} desc={day.desc} />
                         )
                     })}
                 </tbody>

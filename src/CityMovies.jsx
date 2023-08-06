@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import Movie from './Movie'
 
 class CityMovies extends React.Component {
     render() {
@@ -15,11 +16,7 @@ class CityMovies extends React.Component {
                 <tbody>
                     { this.props.moviesData.map((movie, idx) => {
                         return (
-                            <tr key={idx} >
-                                <td>{ idx + 1 }</td>
-                                <td>{movie.popularity}</td>
-                                <td>{movie.title}</td>
-                            </tr>
+                            <Movie key={idx} idx={idx} title={movie.title} popularity={movie.popularity} />
                         )
                     })}
                 </tbody>
